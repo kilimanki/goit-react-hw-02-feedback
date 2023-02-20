@@ -6,5 +6,5 @@ const CountTotalFeedback = ({ total }) => {
 
 export default CountTotalFeedback;
 CountTotalFeedback.propTypes = {
-  totla: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
 };
