@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import css from './Buttons.module.css';
 const Buttons = ({ onGood, onNeutral, onBad }) => {
   return (
@@ -15,3 +16,8 @@ const Buttons = ({ onGood, onNeutral, onBad }) => {
   );
 };
 export default Buttons;
+Buttons.propTypes = {
+  onBad: PropTypes.func.isRequired,
+  onGood: PropTypes.func.isRequired,
+  onNeutral: PropTypes.func.isRequired,
+};
