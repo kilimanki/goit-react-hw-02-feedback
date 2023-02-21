@@ -3,7 +3,7 @@ import css from './Buttons.module.css';
 const Buttons = ({ keys = [], click }) => {
   const elements = keys.map(item => {
     return (
-      <button key={item} className={css.btn} onClick={() => click(`${item}`)}>
+      <button key={item} className={css.btn} onClick={() => click(item)}>
         {item}
       </button>
     );
