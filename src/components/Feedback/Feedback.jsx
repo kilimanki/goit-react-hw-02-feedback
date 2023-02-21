@@ -13,24 +13,11 @@ class Feedback extends Component {
     bad: 0,
   };
 
-  goodClick = () => {
+  onClick = name => {
     this.setState(prevState => {
+      const value = prevState[name];
       return {
-        good: prevState.good + 1,
-      };
-    });
-  };
-  neutralClick = () => {
-    this.setState(prevState => {
-      return {
-        neutral: prevState.neutral + 1,
-      };
-    });
-  };
-  badClick = () => {
-    this.setState(prevState => {
-      return {
-        bad: prevState.bad + 1,
+        [name]: value + 1,
       };
     });
   };
@@ -39,33 +26,30 @@ class Feedback extends Component {
 
     return total;
   };
-  calcPercent(name) {
-    const value = this.state[name];
+  calcPercent() {
+    const { good } = this.state;
     const total = this.calcTotal();
     if (!total) {
       return 0;
     }
-    const result = Math.round((value / total) * 100);
+    const result = Math.round((good / total) * 100);
     return result;
   }
 
   render() {
     const total = this.calcTotal();
     const { good, neutral, bad } = this.state;
-    const goodPercent = this.calcPercent('good');
+    const goodPercent = this.calcPercent();
+    const keys = Object.keys(this.state);
 
     return (
       <>
         <Section title="Please,leave feedback">
-          <Buttons
-            onGood={this.goodClick}
-            onNeutral={this.neutralClick}
-            onBad={this.badClick}
-          />
+          <Buttons keys={keys} click={this.onClick} />
         </Section>
 
         <Section title="Statistics">
-          {this.calcTotal() === 0 ? (
+          {total === 0 ? (
             <Notification message="There is no feedback" />
           ) : (
             <>
